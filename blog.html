@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+
+    <title>Blog</title>
+
+</head>
+
+<body class="mx-28">
+
+    <h1 class="text-center font-semibold text-3xl pt-5 pb-3">The Q&A of the assignment</h1>
+    <hr>
+
+    <section>
+        <h3 class="font-bold">#Q1: map filter forEach find differences</h3>
+        <p>
+            The <u>map</u> method transforms each element of an array using a function, returning a new array with the
+            modified values. It is useful for modifying each element and obtaining a new array.
+        </p>
+
+        <p>
+            The <u>filter</u> method creates a new array with all elements that pass the test implemented by the
+            provided
+            function. It is useful for extracting elements based on a specific condition.
+
+        </p>
+        <p>
+            The <u>forEach</u> method executes a function once for each element, not returning a new array. Iterating
+            over
+            all elements without creating a new one, iterating over all elements without creating a new one.
+        </p>
+
+        <p>
+            The <u>find</u> method returns the value of the first element in the array that satisfies the provided
+            testing
+            function. These methods serve different purposes and should be used based on the specific requirements of
+            your
+            code.
+
+        </p>
+    </section>
+    <section>
+        <h3 class="font-bold">#Q2: local storage ,section storage ,cookies differences</h3>
+        localStorage, sessionStorage, and cookies are web browser storage mechanisms that store data locally on the
+        user's device. They differ in scope, storage limits, and data management. localStorage persists data even after
+        the browser is closed and can be accessed across browser sessions. sessionStorage is available only for the
+        duration of the page session. cookies are used for storing small data such as user preferences or session
+        identifiers and can have an expiration time set by the server. localStorage provides larger storage capacity
+        compared to cookies and sessionStorage, but browsers may impose their own limits. cookies have smaller storage
+        limits and can be accessed and manipulated both on the client and server side.
+    </section>
+    <section>
+        <h3 class="font-bold">#Q3:How Event loop work?</h3>
+        Summary:
+        In JavaScript, the event loop manages asynchronous operations by continuously checking the event queue for
+        events. When the main thread is idle, it processes these events, executing their associated callback functions.
+        This allows JavaScript to handle asynchronous tasks efficiently while maintaining responsiveness in web
+        applications, as it ensures that asynchronous operations do not block the main thread.
+    </section>
+    <section>
+        <h3 class="font-bold">#Q4:How Quiz Timer function work?</h3>
+        <pre>
+            <code class="language-html">
+                const quizTimer = (dismiss) => {
+                    if (dismiss) {
+                      clearInterval(timer);
+                      return;
+                    }
+                    timer = setInterval(() => {
+                      let countHtml = document.querySelector("#count");
+                      let covtMin = Math.floor(count / 60);
+                      let mod = count % 60;
+                      let min = covtMin.toString().length === 1 ? `0${covtMin}` : covtMin;
+                      let countSec = mod.toString().length === 1 ? `0${mod}` : mod;
+                  
+                      countHtml.innerHTML = `${min + ":" + countSec
+                        }<sub class="text-xs">sec</sub>`;
+                      count++;
+                      if (count > 60) {
+                        if (count % 2 === 0) {
+                          countHtml.classList.remove("text-red-300");
+                          countHtml.classList.add("text-red-700");
+                        } else {
+                          countHtml.classList.remove("text-red-700");
+                          countHtml.classList.add("text-red-300");
+                        }
+                      }
+                    }, 1000);
+                  };
+            </code>
+        </pre>
+        The quizTimer function is an arrow function that manages a timer for a quiz. It is defined with a single
+        parameter dismiss. The function has a conditional check if (dismiss) to determine if the timer needs to be
+        dismissed. If dismissed, the function returns. If not dismissed, the timer is started or continued. The
+        setInterval function executes a given function at specified intervals, updating the timer display and changing
+        the text color. The timer logic is implemented inside the setInterval function, which selects the HTML element
+        with the id #count, calculates minutes and seconds, and concatenates them to form the timer display. The
+        function continues to execute until the timer is dismissed.
+    </section>
+    <section>
+        <h3 class="font-bold">#Q5:How Choose Quiz function work?</h3>
+        <pre>
+            <code>
+                const chooseQuiz = (index, givenAns) => {
+                    const isExist = answers.find((ans) => ans.id === quizData[index].id);
+                    if (isExist) {
+                      let serial = 0;
+                      for (let quiz of answers) {
+                        if (isExist.id === quiz.id) {
+                          answers.splice(serial, 1, { ...quizData[index], givenAns });
+                          break;
+                        }
+                        serial++;
+                      }
+                    } else {
+                      answers.push({ ...quizData[index], givenAns });
+                    }
+                    displayAnswers(answers);
+                  };
+            </code>
+        </pre>
+        The chooseQuiz function manages user quiz selections by determining whether an answer is already available for a
+        specific quiz index. It updates the answer with the user's new choice if one already exists. The user's choice
+        is added to the responses array to create a new answer in the event that none already exists. The function uses
+        the displayAnswers function to cause the updated answers to be displayed on the user interface (UI) after
+        updating or adding the answer.
+    </section>
+
+
+
+    <button onclick="history.back()" class="btn  p-2 mt-3 rounded-lg
+    bg-orange-600 text-white">Previous</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</body>
+
+</html>
